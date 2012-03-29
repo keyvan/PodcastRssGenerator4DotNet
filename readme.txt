@@ -11,3 +11,7 @@ podcasts using iTunes metadata.
 The implementaiton is described in details on my blog:
 
 http://keyvan.io/how-to-create-a-podcast-rss-feed-in-net
+
+NuGet package:
+
+http://nuget.org/packages/PodcastRssGenerator4DotNet
