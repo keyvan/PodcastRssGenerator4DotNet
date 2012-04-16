@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RssGeneratorValidation.cs" />
     <Compile Include="Episode.cs" />
     <Compile Include="RssGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

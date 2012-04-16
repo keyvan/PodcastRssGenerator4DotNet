@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Xml;
 
 namespace PodcastRssGenerator4DotNet
@@ -8,6 +7,8 @@ namespace PodcastRssGenerator4DotNet
     {
         public void Generate(XmlWriter writer)
         {
+            ValidatePodcastProperties();
+
             string itunesUri = "http://www.itunes.com/dtds/podcast-1.0.dtd";
 
             // Start document
@@ -92,6 +93,8 @@ namespace PodcastRssGenerator4DotNet
             if (this.Episodes != null)
                 foreach (Episode episode in this.Episodes)
                 {
+                    ValidateEpisodeProperties(episode);
+
                     // Start podcast item
                     writer.WriteStartElement("item");
 
