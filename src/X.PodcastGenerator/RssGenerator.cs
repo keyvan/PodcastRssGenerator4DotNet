@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 
-namespace PodcastRssGenerator4DotNet
+namespace X.PodcastGenerator
 {
     public partial class RssGenerator
     {
+        public RssGenerator()
+        {
+              this.Episodes = new List<Episode>();  
+        }
+        
         public void Generate(XmlWriter writer)
         {
             ValidatePodcastProperties();
@@ -120,6 +126,7 @@ namespace PodcastRssGenerator4DotNet
                     writer.WriteElementString("subtitle", itunesUri, episode.SubTitle);
                     writer.WriteElementString("summary", itunesUri, episode.Summary);
                     writer.WriteElementString("duration", itunesUri, episode.Duration);
+                    
                     if (!string.IsNullOrEmpty(episode.Keywords))
                         writer.WriteElementString("keywords", itunesUri, episode.Keywords);
 
@@ -138,6 +145,16 @@ namespace PodcastRssGenerator4DotNet
 
             writer.Flush();
             writer.Close();
+        }
+
+        private void ValidateEpisodeProperties(Episode episode)
+        {
+            
+        }
+
+        private void ValidatePodcastProperties()
+        {
+            
         }
     }
 }

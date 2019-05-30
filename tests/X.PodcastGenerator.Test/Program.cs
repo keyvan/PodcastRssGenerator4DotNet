@@ -1,27 +1,26 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Xml;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+using X.PodcastGenerator;
 
 namespace PodcastRssGenerator4DotNet.Test
 {
-    public partial class _Default : System.Web.UI.Page
+    class Program
     {
-        protected void Page_Load(object sender, EventArgs e)
+        static async Task Main(string[] args)
         {
-            Response.ClearContent();
+            XmlWriterSettings settings = new XmlWriterSettings {Encoding = Encoding.UTF8};
 
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Encoding = Encoding.UTF8;
 
-            Response.ContentType = "application/rss+xml";
-            XmlWriter writer = XmlWriter.Create(Response.Output, settings);
+            const string contentType = "application/rss+xml";
 
-            RssGenerator generator = new RssGenerator();
+            var stringWriter = new StringWriter();
+            var writer = XmlWriter.Create(stringWriter, settings);
+
+            var generator = new RssGenerator();
             generator.Title = "Keyvan.FM";
             generator.SubTitle = generator.Description = "The online podcast channel of Keyvan Nayyeri.";
             generator.HomepageUrl = "http://keyvan.fm";
@@ -34,8 +33,9 @@ namespace PodcastRssGenerator4DotNet.Test
             generator.iTunesCategory = "Technology";
             generator.iTunesSubCategory = "Software How-To";
 
-            List<Episode> episodes = new List<Episode>();
-            episodes.Add(new Episode()
+           
+            
+            generator.Episodes.Add(new Episode()
             {
                 Title = "Introduction",
                 Summary = "In this first and short episode, I introduce myself, Keyvan.FM, and the type of content that I'm going to publish on this podcast.",
@@ -49,11 +49,13 @@ namespace PodcastRssGenerator4DotNet.Test
                 IsExplicit = false
             });
 
-            generator.Episodes = episodes;
 
             generator.Generate(writer);
 
-            Response.End();
+            Console.WriteLine(stringWriter.ToString());
+
+            
+            Console.ReadLine();
         }
     }
 }

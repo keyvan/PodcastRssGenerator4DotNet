@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PodcastRssGenerator4DotNet
+namespace X.PodcastGenerator
 {
     public partial class RssGenerator
     {
